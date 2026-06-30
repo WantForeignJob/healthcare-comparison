@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Healthcare Insights — What Reddit Says</title>
+<meta name="description" content="A curated look at how Reddit users experience and critique the Swiss healthcare system — from mandatory premiums to real patient stories.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --red-border: #fecaca;
+    --red-dark: #991b1b;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --amber-600: #d97706;
+    --green-50: #f0fdf4;
+    --green-600: #16a34a;
+    --green-700: #15803d;
+    --blue-50: #eff6ff;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --max-w: 800px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    color: var(--slate-800);
+    background: var(--slate-50);
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--slate-900) 0%, #1a1a2e 100%);
+    color: white;
+    padding: 64px 24px 48px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    max-width: 650px;
+    margin: 0 auto 16px;
+  }
+  .hero p {
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+  }
+
+  /* Stats Row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    max-width: var(--max-w);
+    margin: -32px auto 0;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid var(--slate-200);
+  }
+  .stat-card .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--red);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--slate-500);
+    margin-top: 4px;
+  }
+
+  /* Content */
+  .container {
+    max-width: var(--max-w);
+    margin: 48px auto;
+    padding: 0 24px;
+  }
+
+  section { margin-bottom: 48px; }
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--red);
+    display: inline-block;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    color: var(--slate-900);
+  }
+  p, li { color: var(--slate-700); }
+  p { margin-bottom: 12px; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 8px; }
+
+  /* Cards */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--slate-200);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .card h3 { margin-top: 0; }
+
+  .card-reddit {
+    border-left: 4px solid #ff4500;
+  }
+  .card-reddit .source-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #ff4500;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .card-reddit .source-link:hover { text-decoration: underline; }
+  .card-reddit .meta {
+    font-size: 0.85rem;
+    color: var(--slate-500);
+    margin-bottom: 12px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-amber { background: var(--amber-100); color: var(--amber-600); }
+  .badge-green { background: var(--green-50); color: var(--green-700); }
+  .badge-blue { background: var(--blue-50); color: var(--blue-700); }
+
+  /* Compare Table */
+  .compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .compare th, .compare td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .compare th {
+    background: var(--slate-100);
+    font-weight: 600;
+    color: var(--slate-700);
+  }
+  .compare tr:last-child td { border: none; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--slate-500);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--slate-200);
+  }
+  footer a { color: var(--slate-600); }
+
+  /* Takeaways */
+  .takeaway {
+    background: var(--red-light);
+    border: 1px solid var(--red-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .takeaway p { margin: 0; color: var(--red-dark); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 16px 40px; }
+    .hero h1 { font-size: 1.5rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 16px; }
+    .stat-card { padding: 14px 10px; }
+    .stat-card .num { font-size: 1.3rem; }
+    .compare { font-size: 0.8rem; }
+    .compare th, .compare td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Switzerland has one of the world's most expensive healthcare systems. Its own citizens say it's broken.</h1>
+  <p>A curated look at Reddit discussions on the Swiss healthcare system — from mandatory premiums to real patient stories.</p>
+</div>
+
+<div class="stats">
+  <div class="stat-card">
+    <span class="num">800+ CHF</span>
+    <span class="label">Avg monthly premium (adult)</span>
+  </div>
+  <div class="stat-card">
+    <span class="num">~11.8%</span>
+    <span class="label">GDP spent on healthcare</span>
+  </div>
+  <div class="stat-card">
+    <span class="num">2500 CHF</span>
+    <span class="label">Max annual deductible</span>
+  </div>
+  <div class="stat-card">
+    <span class="num">50%</span>
+    <span class="label">Ambulance covered (default)</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Problem Overview -->
+  <section>
+    <h2>The Core Problem</h2>
+    <div class="takeaway">
+      <p>"The system is designed to make you pay, and also to discourage you from using it."</p>
+    </div>
+    <p>Switzerland's mandatory health insurance (OKP) system is a paradox: world-class medical outcomes combined with some of the highest premiums on earth and a relentlessly regressive cost structure. The consensus from hundreds of Reddit threads is summarized below.</p>
+
+    <div class="card">
+      <h3>How the system works</h3>
+      <ul>
+        <li><strong>Mandatory insurance</strong> — every resident must buy basic coverage (OKP). No opt-out.</li>
+        <li><strong>Premium varies by canton</strong> — differences of up to 25% between regions.</li>
+        <li><strong>Deductible (franchise)</strong> — choose 300–2500 CHF. Higher deductible = lower premium, but you pay 100% of costs up to that amount.</li>
+        <li><strong>Copay (Selbstbehalt)</strong> — 10% of costs above the deductible, capped at 700 CHF/year.</li>
+        <li><strong>No subsidies for middle income</strong> — premiums are flat-rate (same for rich and poor within a canton), so lower-income families get partial relief, but middle-class households pay the full brunt.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Real Stories -->
+  <section>
+    <h2>Reddit: Real Stories</h2>
+
+    <div class="card card-reddit">
+      <div class="meta">r/Switzerland — "Switzerland's Healthcare Is Pure Shit" · 396👍 · 281 comments</div>
+      <p>The OP describes being charged <strong>500 CHF</strong> for a 15-minute ambulance ride because basic insurance only covers 50% (up to a 500 CHF cap). They point out that premiums vary wildly between cantons — someone in Appenzell can pay 25% more than someone in Zurich for the exact same coverage.</p>
+      <p>A physician in Bern (who has since left Switzerland) comments: "I worked 60-hour weeks and spent half my time arguing with insurance companies. The good doctors are leaving."</p>
+      <p>Another user shares: "My insurance denied a guideline-recommended treatment and insisted I try an older drug with worse side effects first. My doctor had to appeal three times."</p>
+      <a class="source-link" href="https://www.reddit.com/r/Switzerland/comments/t8i3cj/switzerlands_healthcare_is_pure_shit/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+
+    <div class="card card-reddit">
+      <div class="meta">r/askswitzerland — "Fed up with Swiss health insurance" · 459👍 · 362 comments</div>
+      <p>OP pays 400+ CHF/month with a 2500 deductible, 10% copay, and a 700 CHF cap — and still feels like they're getting nothing. A top comment compares Switzerland with Sweden:</p>
+      <ul>
+        <li><strong>Sweden:</strong> ~10% progressive income tax funds healthcare (~4000 CHF/year for median income). Rich pay more, poor pay less. Everyone is covered.</li>
+        <li><strong>Switzerland:</strong> ~10.5% of income + mandatory premiums that are the same for everyone in the canton. The rich pay a smaller share of their income.</li>
+      </ul>
+      <p>Summary: "Sweden: the rich subsidize the poor. Switzerland: everyone for themselves."</p>
+      <p>One user quips: "I paid 9000 USD to give birth in the US. In Switzerland I paid for parking." — highlighting the US comparison isn't always unfavorable.</p>
+      <a class="source-link" href="https://www.reddit.com/r/askswitzerland/comments/1d7y5eb/fed_up_with_swiss_health_insurance/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+
+    <div class="card card-reddit">
+      <div class="meta">r/askswitzerland — "Is the Swiss healthcare system designed to make people avoid doctors?" · 162👍 · 126 comments</div>
+      <p>An immigrant asks why their Swiss colleagues refuse to see a doctor for persistent issues. A Swiss friend explains: "Small things — you just don't go."</p>
+      <p>A doctor comments: "Since COVID, many experienced physicians have quit. The patients left behind are more complex, but the reimbursement model hasn't changed. We're seeing more avoidable emergency cases because people delayed primary care."</p>
+      <p>The consensus: high deductibles are intentional cost-control — but they create a perverse incentive where minor issues escalate into expensive emergencies.</p>
+      <a class="source-link" href="https://www.reddit.com/r/askswitzerland/comments/1dg2avm/is_the_swiss_healthcare_system_designed_to_make/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+  </section>
+
+  <!-- Who it's good/bad for -->
+  <section>
+    <h2>Who Wins, Who Loses</h2>
+
+    <div class="card">
+      <h3><span class="badge badge-green">Wins</span> Wealthy individuals</h3>
+      <p>Flat-rate premiums mean the rich pay the same as everyone else, making Swiss healthcare one of the most regressive systems in the developed world. They can also afford the lowest deductible (300 CHF) for maximum coverage.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="badge badge-amber">Mixed</span> Low-income households</h3>
+      <p>Premium subsidies exist, but the bureaucracy to claim them is significant. Many don't know they qualify or find the paperwork too complex. Those who do get relief still face deductibles and copays.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="badge badge-red">Loses the most</span> Middle class</h3>
+      <p>Too wealthy for subsidies, too strained to absorb 2500 CHF deductibles + 400+ CHF/month premiums. This group bears the heaviest burden — "paying for the right to keep paying."</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="badge badge-red">Loses</span> Freelancers & self-employed</h3>
+      <p>Employers in Switzerland typically cover part of the accident insurance (UVG), but basic health insurance falls entirely on the individual. Freelancers pay full premium + full deductible + full copay with no employer subsidy.</p>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section>
+    <h2>How It Compares</h2>
+    <div class="card" style="overflow-x: auto;">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Switzerland</th>
+            <th>Germany</th>
+            <th>France</th>
+            <th>Sweden</th>
+            <th>USA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Funding model</td>
+            <td>Flat premium + income</td>
+            <td>Income-based (% of salary)</td>
+            <td>Income tax + complementaire</td>
+            <td>Progressive income tax</td>
+            <td>Employer + private</td>
+          </tr>
+          <tr>
+            <td>Annual cost (median)</td>
+            <td>~7000–9000 CHF</td>
+            <td>~5000–7000 EUR</td>
+            <td>~3000–5000 EUR</td>
+            <td>~4000 CHF (tax)</td>
+            <td>~8000–12000 USD</td>
+          </tr>
+          <tr>
+            <td>Regressive?</td>
+            <td>Strongly</td>
+            <td>No (income-linked)</td>
+            <td>Moderate</td>
+            <td>No (progressive)</td>
+            <td>Strongly</td>
+          </tr>
+          <tr>
+            <td>Deductible</td>
+            <td>300–2500 CHF</td>
+            <td>None (small copays)</td>
+            <td>None (tiers modérateur)</td>
+            <td>~1200 SEK (~100 CHF)</td>
+            <td>Varies (often 1000–8000 USD)</td>
+          </tr>
+          <tr>
+            <td>Ambulance coverage</td>
+            <td>50% (most cantons)</td>
+            <td>~100%</td>
+            <td>~65–100%</td>
+            <td>~100%</td>
+            <td>Varies by plan</td>
+          </tr>
+          <tr>
+            <td>Access speed</td>
+            <td>Fast for insured</td>
+            <td>Fast</td>
+            <td>Moderate</td>
+            <td>Slow for non-urgent</td>
+            <td>Fast (if insured well)</td>
+          </tr>
+          <tr>
+            <td>Quality rating</td>
+            <td>Excellent</td>
+            <td>Excellent</td>
+            <td>Good</td>
+            <td>Good</td>
+            <td>Mixed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="takeaway">
+      <p>The pattern is clear: Switzerland has top-tier outcomes but the worst cost burden of any European system. It's better than the US for catastrophic scenarios, but worse than Germany, France, or the Nordics for everyday affordability.</p>
+    </div>
+  </section>
+
+  <!-- The Bureaucracy Layer -->
+  <section>
+    <h2>Bureaucracy & Burnout</h2>
+    <p>Across all three threads, a recurring theme is administrative burden — on both patients and doctors:</p>
+    <ul>
+      <li>Doctors spend up to 50% of their time on insurance paperwork</li>
+      <li>Treatment approvals require appeals, sometimes multiple rounds</li>
+      <li>Guideline-recommended therapies are routinely denied in favor of cheaper alternatives</li>
+      <li>COVID exodus of experienced physicians has worsened care access</li>
+    </ul>
+  </section>
+
+  <!-- Bottom Line -->
+  <section>
+    <h2>The Bottom Line</h2>
+    <div class="takeaway">
+      <p>"You pay a fortune not for care, but for the right to keep paying."</p>
+    </div>
+    <p>Switzerland's healthcare delivers excellent outcomes — if you can afford the entry fee. The system is <strong>technically universal</strong> but <strong>effectively regressive</strong>, punishing the middle class and creating financial barriers that turn small problems into expensive ones.</p>
+    <p>It's better than the American model (no medical bankruptcy for a routine birth). But compared to its German, French, and Nordic neighbors, Switzerland leaves a large segment of its population feeling squeezed by a system that serves them poorly.</p>
+  </section>
+
+  <!-- Sources -->
+  <section>
+    <h2>Raw Sources</h2>
+    <ul>
+      <li><a href="https://www.reddit.com/r/Switzerland/comments/t8i3cj/switzerlands_healthcare_is_pure_shit/" target="_blank" rel="noopener">r/Switzerland — "Switzerland's Healthcare Is Pure Shit"</a></li>
+      <li><a href="https://www.reddit.com/r/askswitzerland/comments/1d7y5eb/fed_up_with_swiss_health_insurance/" target="_blank" rel="noopener">r/askswitzerland — "Fed up with Swiss health insurance"</a></li>
+      <li><a href="https://www.reddit.com/r/askswitzerland/comments/1dg2avm/is_the_swiss_healthcare_system_designed_to_make/" target="_blank" rel="noopener">r/askswitzerland — "Is the Swiss healthcare system designed to make people avoid doctors?"</a></li>
+    </ul>
+  </section>
+</div>
+
+<footer>
+  <p>Built from public Reddit discussions. Not medical or financial advice. <a href="https://github.com/WantForeignJob/swiss-healthcare-insights">GitHub</a></p>
+</footer>
+
+</body>
+</html>
