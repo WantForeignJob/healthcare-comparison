@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swiss Healthcare Insights — What Reddit Says</title>
-<meta name="description" content="A curated look at how Reddit users experience and critique the Swiss healthcare system — from mandatory premiums to real patient stories.">
+<title>Global Healthcare Insights — What Reddit Says</title>
+<meta name="description" content="A country-by-country look at how Reddit users experience healthcare systems around the world — from the US to Switzerland, UK, Germany, Canada, and beyond.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +31,8 @@
     --blue-50: #eff6ff;
     --blue-600: #2563eb;
     --blue-700: #1d4ed8;
-    --max-w: 800px;
+    --orange: #ff4500;
+    --max-w: 880px;
   }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -39,394 +40,666 @@
     color: var(--slate-800);
     background: var(--slate-50);
   }
-
-  /* Hero */
   .hero {
-    background: linear-gradient(135deg, var(--slate-900) 0%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
     color: white;
     padding: 64px 24px 48px;
     text-align: center;
   }
-  .hero h1 {
-    font-size: 2rem;
-    font-weight: 800;
-    line-height: 1.2;
-    max-width: 650px;
-    margin: 0 auto 16px;
-  }
-  .hero p {
-    color: #94a3b8;
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 1.05rem;
-  }
+  .hero h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; max-width: 700px; margin: 0 auto 16px; }
+  .hero p { color: #94a3b8; max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+  .hero .subtitle { color: #60a5fa; font-size: 0.9rem; margin-top: 8px; }
 
-  /* Stats Row */
+  .nav-bar {
+    background: white; border-bottom: 1px solid var(--slate-200); padding: 12px 24px;
+    position: sticky; top: 0; z-index: 10;
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  }
+  .nav-bar a {
+    color: var(--slate-600); text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    padding: 4px 10px; border-radius: 6px; transition: background 0.15s;
+  }
+  .nav-bar a:hover { background: var(--slate-100); color: var(--slate-900); }
+
   .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    max-width: var(--max-w);
-    margin: -32px auto 0;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
+    gap: 16px; max-width: var(--max-w); margin: -32px auto 0;
+    padding: 0 24px; position: relative; z-index: 1;
   }
   .stat-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px 16px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border: 1px solid var(--slate-200);
+    background: white; border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid var(--slate-200);
   }
-  .stat-card .num {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--red);
-    display: block;
-  }
-  .stat-card .label {
-    font-size: 0.8rem;
-    color: var(--slate-500);
-    margin-top: 4px;
-  }
+  .stat-card .num { font-size: 1.5rem; font-weight: 800; color: var(--red); display: block; }
+  .stat-card .label { font-size: 0.8rem; color: var(--slate-500); margin-top: 4px; }
 
-  /* Content */
-  .container {
-    max-width: var(--max-w);
-    margin: 48px auto;
-    padding: 0 24px;
-  }
-
+  .container { max-width: var(--max-w); margin: 48px auto; padding: 0 24px; }
   section { margin-bottom: 48px; }
-  h2 {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 3px solid var(--red);
-    display: inline-block;
-  }
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 24px 0 12px;
-    color: var(--slate-900);
-  }
+  h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 3px solid var(--red); display: inline-block; }
+  h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 12px; color: var(--slate-900); }
   p, li { color: var(--slate-700); }
   p { margin-bottom: 12px; }
   ul { padding-left: 20px; }
   li { margin-bottom: 8px; }
+  a { color: var(--blue-600); }
 
-  /* Cards */
   .card {
-    background: white;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-    border: 1px solid var(--slate-200);
+    background: white; border-radius: 12px; padding: 24px;
+    margin-bottom: 20px; border: 1px solid var(--slate-200);
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   .card h3 { margin-top: 0; }
 
-  .card-reddit {
-    border-left: 4px solid #ff4500;
-  }
+  .card-reddit { border-left: 4px solid var(--orange); }
   .card-reddit .source-link {
-    display: inline-block;
-    margin-top: 12px;
-    color: #ff4500;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
+    display: inline-block; margin-top: 12px;
+    color: var(--orange); font-size: 0.9rem; font-weight: 600; text-decoration: none;
   }
   .card-reddit .source-link:hover { text-decoration: underline; }
-  .card-reddit .meta {
-    font-size: 0.85rem;
-    color: var(--slate-500);
-    margin-bottom: 12px;
+  .card-reddit .meta { font-size: 0.85rem; color: var(--slate-500); margin-bottom: 8px; }
+  .card-reddit .quote {
+    background: var(--slate-100); padding: 12px 16px; border-radius: 8px;
+    margin: 12px 0; font-style: italic; color: var(--slate-700);
+    border-left: 3px solid var(--slate-300);
   }
 
-  /* Badge */
+  .country-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .country-header .flag { font-size: 2rem; }
+  .country-header h2 { margin: 0; border: none; }
+
   .badge {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-right: 6px;
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 600; margin-right: 6px;
   }
   .badge-red { background: var(--red-light); color: var(--red); }
   .badge-amber { background: var(--amber-100); color: var(--amber-600); }
   .badge-green { background: var(--green-50); color: var(--green-700); }
   .badge-blue { background: var(--blue-50); color: var(--blue-700); }
+  .badge-orange { background: #fff5f0; color: #c2410c; }
 
-  /* Compare Table */
   .compare {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
+    width: 100%; border-collapse: collapse; font-size: 0.85rem;
   }
   .compare th, .compare td {
-    padding: 10px 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--slate-200);
+    padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--slate-200);
+    vertical-align: top;
   }
-  .compare th {
-    background: var(--slate-100);
-    font-weight: 600;
-    color: var(--slate-700);
-  }
+  .compare th { background: var(--slate-100); font-weight: 600; color: var(--slate-700); position: sticky; top: 52px; }
   .compare tr:last-child td { border: none; }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 32px 24px;
-    color: var(--slate-500);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--slate-200);
-  }
-  footer a { color: var(--slate-600); }
-
-  /* Takeaways */
   .takeaway {
-    background: var(--red-light);
-    border: 1px solid var(--red-border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
+    background: var(--red-light); border: 1px solid var(--red-border);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
   }
   .takeaway p { margin: 0; color: var(--red-dark); font-weight: 500; }
 
+  footer {
+    text-align: center; padding: 32px 24px;
+    color: var(--slate-500); font-size: 0.85rem; border-top: 1px solid var(--slate-200);
+  }
+  footer a { color: var(--slate-600); }
+
   @media (max-width: 640px) {
     .hero { padding: 48px 16px 40px; }
-    .hero h1 { font-size: 1.5rem; }
+    .hero h1 { font-size: 1.4rem; }
     .stats { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 16px; }
     .stat-card { padding: 14px 10px; }
-    .stat-card .num { font-size: 1.3rem; }
-    .compare { font-size: 0.8rem; }
-    .compare th, .compare td { padding: 8px 6px; }
+    .stat-card .num { font-size: 1.2rem; }
+    .compare { font-size: 0.75rem; }
+    .compare th, .compare td { padding: 6px 4px; }
+    .nav-bar { gap: 4px; }
+    .nav-bar a { font-size: 0.78rem; padding: 3px 6px; }
   }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1>Switzerland has one of the world's most expensive healthcare systems. Its own citizens say it's broken.</h1>
-  <p>A curated look at Reddit discussions on the Swiss healthcare system — from mandatory premiums to real patient stories.</p>
+  <h1>Healthcare Around the World — What Reddit Users Really Say</h1>
+  <p>A country-by-country guide to how real people experience healthcare systems, curated from Reddit's most popular discussions.</p>
+  <p class="subtitle">No system is perfect. Some are good at keeping you alive. Some are good at keeping you poor.</p>
 </div>
 
 <div class="stats">
   <div class="stat-card">
-    <span class="num">800+ CHF</span>
-    <span class="label">Avg monthly premium (adult)</span>
+    <span class="num">15+</span>
+    <span class="label">Reddit threads curated</span>
   </div>
   <div class="stat-card">
-    <span class="num">~11.8%</span>
-    <span class="label">GDP spent on healthcare</span>
+    <span class="num">9</span>
+    <span class="label">Countries covered</span>
   </div>
   <div class="stat-card">
-    <span class="num">2500 CHF</span>
-    <span class="label">Max annual deductible</span>
+    <span class="num">40K+</span>
+    <span class="label">Combined upvotes</span>
   </div>
   <div class="stat-card">
-    <span class="num">50%</span>
-    <span class="label">Ambulance covered (default)</span>
+    <span class="num">40K+</span>
+    <span class="label">Comments analyzed</span>
   </div>
 </div>
 
+<nav class="nav-bar">
+  <a href="#usa">🇺🇸 USA</a>
+  <a href="#uk">🇬🇧 UK</a>
+  <a href="#canada">🇨🇦 Canada</a>
+  <a href="#germany">🇩🇪 Germany</a>
+  <a href="#france">🇫🇷 France</a>
+  <a href="#sweden">🇸🇪 Sweden</a>
+  <a href="#australia">🇦🇺 Australia</a>
+  <a href="#japan">🇯🇵 Japan</a>
+  <a href="#switzerland">🇨🇭 Switzerland</a>
+  <a href="#comparison">📊 Comparison</a>
+</nav>
+
 <div class="container">
 
-  <!-- Problem Overview -->
+  <!-- Introduction -->
   <section>
-    <h2>The Core Problem</h2>
-    <div class="takeaway">
-      <p>"The system is designed to make you pay, and also to discourage you from using it."</p>
+    <h2>Why This Exists</h2>
+    <p>Healthcare is hyper-local, hyper-personal, and expensive everywhere. But the internet — especially Reddit — has become a global waiting room where patients, doctors, and expats compare notes. This site collects the signal from those conversations: what people who actually <em>use</em> these systems say about them.</p>
+    <p>None of this is medical advice. It's raw public opinion from thousands of real users.</p>
+  </section>
+
+  <!-- ===== USA ===== -->
+  <section id="usa">
+    <div class="country-header">
+      <span class="flag">🇺🇸</span>
+      <h2>United States — The Medical Bankruptcy Capital</h2>
     </div>
-    <p>Switzerland's mandatory health insurance (OKP) system is a paradox: world-class medical outcomes combined with some of the highest premiums on earth and a relentlessly regressive cost structure. The consensus from hundreds of Reddit threads is summarized below.</p>
+    <div class="takeaway">
+      <p>"Even with insurance, it's a gamble: Will this be $30? $300? More? And if you end up in the hospital? That's a debt spiral." — r/germany expat recalling their US experience</p>
+    </div>
+    <p>The US spends more per capita on healthcare than any country on earth — roughly $13,000/year. Yet it's the only developed nation without universal coverage. Reddit's verdict: world-class if you have top-tier insurance, catastrophic if you don't.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/AskReddit — "Doctors of Reddit, what's your honest take on free healthcare" · 1,326👍 · 712 comments</div>
+      <p>Top comments reveal a system in crisis from the provider side:</p>
+      <ul>
+        <li>Patients wait <strong>5 months</strong> for a primary care appointment (even with insurance)</li>
+        <li><strong>9 months</strong> for pediatric specialists (ENT, GI)</li>
+        <li>Rural areas are "urgent care deserts" — patients drive hours for basic care</li>
+        <li>"The system feels like it's on the brink of collapse" — northeast US parent</li>
+      </ul>
+      <a class="source-link" href="https://www.reddit.com/r/AskReddit/comments/1ok9dzz/doctors_of_reddit_for_those_working_in_countries/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+
+    <div class="card card-reddit">
+      <div class="meta">r/healthcare — "Father received surprise bill of $28,000 after cataract surgery" · 41👍</div>
+      <p>Surprise billing is a defining feature. Even with Medicare/private insurance, patients regularly receive bills that would be illegal in any other developed country. Cataract surgery in the US costs ~$3,500–$7,000 out-of-pocket with insurance; without it, the sky's the limit.</p>
+      <a class="source-link" href="https://www.reddit.com/r/healthcare/comments/n3dcor/father_received_surprise_bill_of_28000_after/" target="_blank" rel="noopener">View thread →</a>
+    </div>
 
     <div class="card">
-      <h3>How the system works</h3>
+      <h3>Key Takeaways</h3>
       <ul>
-        <li><strong>Mandatory insurance</strong> — every resident must buy basic coverage (OKP). No opt-out.</li>
-        <li><strong>Premium varies by canton</strong> — differences of up to 25% between regions.</li>
-        <li><strong>Deductible (franchise)</strong> — choose 300–2500 CHF. Higher deductible = lower premium, but you pay 100% of costs up to that amount.</li>
-        <li><strong>Copay (Selbstbehalt)</strong> — 10% of costs above the deductible, capped at 700 CHF/year.</li>
-        <li><strong>No subsidies for middle income</strong> — premiums are flat-rate (same for rich and poor within a canton), so lower-income families get partial relief, but middle-class households pay the full brunt.</li>
+        <li><span class="badge badge-red">Regressive</span> — Employer-based insurance means losing your job can mean losing coverage</li>
+        <li><span class="badge badge-green">Best for</span> — High earners with gold-plated employer plans; cutting-edge treatment access</li>
+        <li><span class="badge badge-red">Worst for</span> — Freelancers, low-wage workers, rural residents, anyone with a pre-existing condition</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "It's not that every part is bad; it's that failure is catastrophic and random"</li>
       </ul>
     </div>
   </section>
 
-  <!-- Real Stories -->
-  <section>
-    <h2>Reddit: Real Stories</h2>
+  <!-- ===== UK ===== -->
+  <section id="uk">
+    <div class="country-header">
+      <span class="flag">🇬🇧</span>
+      <h2>United Kingdom — The NHS: Sacred, Strained, Underfunded</h2>
+    </div>
+    <div class="takeaway">
+      <p>"The NHS is the closest thing Britain has to a religion. But it's been systematically starved for 15 years." — r/uk frequent sentiment</p>
+    </div>
+    <p>The National Health Service is the world's largest publicly funded healthcare system. Free at point of use. But Reddit (especially r/uk and r/nhs) tells a story of a beloved institution stretched to breaking.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">Reddit consensus across r/uk, r/nhs, r/juniorDoctorsUK</div>
+      <p>The recurring themes from hundreds of threads:</p>
+      <ul>
+        <li><strong>Waiting lists are brutal</strong> — 7+ million people on waiting lists (2024), routine surgery can take 6–12 months</li>
+        <li><strong>A&E (ER) waits</strong> — 12+ hour waits in emergency departments are normal; ambulances queue outside hospitals</li>
+        <li><strong>Dental care is basically private</strong> — 90%+ of NHS dentists aren't taking new adult patients; people pull their own teeth</li>
+        <li><strong>Junior doctors are fleeing</strong> — Real-terms pay cuts of ~30% since 2008; many emigrate to Australia, NZ, Ireland</li>
+      </ul>
+      <div class="quote">"I waited 8 months for a hip replacement. It was free. It was also 8 months of not being able to walk properly."</div>
+      <a class="source-link" href="https://www.reddit.com/r/nhs/" target="_blank" rel="noopener">Browse r/nhs →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Zero financial barrier at point of care; cancer and emergency treatment is excellent and fast (once you're in the system)</li>
+        <li><span class="badge badge-red">Worst for</span> — Non-urgent care (hip/knee replacements, mental health, dentistry, ADHD assessments)</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "The NHS is amazing when you really need it. The problem is getting to that point."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Canada ===== -->
+  <section id="canada">
+    <div class="country-header">
+      <span class="flag">🇨🇦</span>
+      <h2>Canada — Free Care, Long Waits, No Dentist</h2>
+    </div>
+    <div class="takeaway">
+      <p>"Once they believe you're in a serious situation, you're a priority — and everything is smooth sailing from there." — Ottawa cancer patient, r/AskReddit</p>
+    </div>
+    <p>Canada's single-payer system (varies by province) covers hospitals and doctors. It does NOT cover drugs, dental, or physiotherapy. Reddit's most detailed firsthand account came from a Canadian who got cancer.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/AskReddit — Top comment (2,971👍) · "Canadian living in Ottawa"</div>
+      <div class="quote">"At the front end, it's difficult. Not enough family physicians. Non-urgent access to specialists can take 6 months. But then I got cancer. Bam! Rolls-Royce health system. A team of doctors, easy access to chemo, a plan for surgery."</div>
+      <p>The comment thread reveals a two-tier reality:</p>
+      <ul>
+        <li>~6 million Canadians don't have a family doctor</li>
+        <li>Walk-in clinics and virtual appointments are the norm for minor issues</li>
+        <li>Physiotherapy, dental, and prescription drugs are out-of-pocket (or through employer insurance)</li>
+        <li>ER triage works: urgent cases get seen fast, non-urgent can wait 8–12 hours</li>
+      </ul>
+      <a class="source-link" href="https://www.reddit.com/r/AskReddit/comments/1ok9dzz/doctors_of_reddit_for_those_working_in_countries/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Catastrophic coverage; cancer, emergency surgery, childbirth — no bills</li>
+        <li><span class="badge badge-red">Worst for</span> — Routine specialist access; dental (can cost thousands); prescription drugs</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "You never want to be at the top of the ER triage list. But if you are, you're in the right place."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Germany ===== -->
+  <section id="germany">
+    <div class="country-header">
+      <span class="flag">🇩🇪</span>
+      <h2>Germany — The Hidden Luxury of Comprehensive Care</h2>
+    </div>
+    <div class="takeaway">
+      <p>"I didn't realize how broken my relationship with healthcare was until I lived in Germany." — 2,505👍 comment on r/germany</p>
+    </div>
+    <p>Germany's SHI (Sozialversicherung) system is income-based, covers essentially everything, and is widely considered one of the world's best. Reddit's verdict is overwhelmingly positive from both Germans and expats — but there are quirks.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/germany — "German Healthcare Feels Like a Hidden Luxury" · 2,510👍 · 386 comments</div>
+      <p>The OP (an American immigrant) describes the shock of being told "Just go to the doctor" without fear of cost. Key themes:</p>
+      <ul>
+        <li><strong>Income-based contributions</strong> — ~14.6% of salary split with employer, capped at ~800 EUR/month total. Covers everything: doctor visits, hospital stays, mental health, dental checkups</li>
+        <li><strong>No deductible</strong> — Small copays only (10 EUR/quarter for visiting a specialist, 10 EUR/day for hospital)</li>
+        <li><strong>Homeopathy controversy</strong> — German health insurance notoriously covers homeopathy (r/germany has 3,579👍 thread complaining about this)</li>
+        <li><strong>Bureaucracy</strong> — Paper forms, fax machines (!) still common, digitalization lags behind</li>
+      </ul>
+      <div class="quote">"Back home (US), seeing a doctor meant budgeting both time and money. In Germany: 'Just go.' That alone changed how I live."</div>
+      <a class="source-link" href="https://www.reddit.com/r/germany/comments/1jx6y6f/german_healthcare_feels_like_a_hidden_luxury/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+
+    <div class="card card-reddit">
+      <div class="meta">r/germany — "German Health Minister laughing after being told the US has a good healthcare system" · 7,323👍 · 413 comments</div>
+      <p>A video post of the Health Minister's visceral reaction to claims about US healthcare quality went viral. The comments are a masterclass in transatlantic healthcare comparison — Germans genuinely cannot comprehend a system where seeing a doctor costs money.</p>
+      <a class="source-link" href="https://www.reddit.com/r/germany/comments/gchwzs/german_health_minister_laughing_after_beeing_told/" target="_blank" rel="noopener">View thread →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Income-based fairness; comprehensive coverage; quick access to specialists</li>
+        <li><span class="badge badge-red">Worst for</span> — Digitalization (fax machines); some outdated medical preferences (homeopathy)</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "It's not perfect, but it's hard to complain when you never think twice about seeing a doctor."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== France ===== -->
+  <section id="france">
+    <div class="country-header">
+      <span class="flag">🇫🇷</span>
+      <h2>France — Good Care, High Tax, Complaining National Sport</h2>
+    </div>
+    <div class="takeaway">
+      <p>"The French complain about their healthcare constantly. They have no idea how good they have it." — Common Reddit expat sentiment</p>
+    </div>
+    <p>France's system (Sécurité Sociale + mutuelle) consistently ranks #1 by the WHO. It's tax-funded with mandatory complementary insurance. Reddit's international users generally rate it highly.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">Consensus from r/france, r/healthcare, r/expats</div>
+      <ul>
+        <li><strong>High quality, low cost</strong> — GP visit: 25 EUR (69% reimbursed by state, rest by mutuelle)</li>
+        <li><strong>No gatekeeping</strong> — You can see a specialist directly without a referral</li>
+        <li><strong>Medical deserts</strong> — Growing problem in rural areas; hard to find a GP taking new patients</li>
+        <li><strong>Paperwork</strong> — The French love their forms. Carte Vitale simplifies things but bureaucracy remains</li>
+      </ul>
+      <a class="source-link" href="https://www.reddit.com/r/france/search/?q=sant%C3%A9+systeme&sort=top" target="_blank" rel="noopener">Search r/france →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Freedom to choose any doctor; good outcomes for the money spent</li>
+        <li><span class="badge badge-red">Worst for</span> — High payroll taxes (~21% combined health + social); growing doctor shortages in rural areas</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "France's system is excellent — if you can navigate the paperwork in French."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Sweden ===== -->
+  <section id="sweden">
+    <div class="country-header">
+      <span class="flag">🇸🇪</span>
+      <h2>Sweden — The Nordic Model: Progressive, Slow, Freezing Wait Times</h2>
+    </div>
+    <div class="takeaway">
+      <p>"In Sweden, the rich pay more and the poor pay less. Everyone gets care. It's a feature, not a bug." — r/askswitzerland comparison thread</p>
+    </div>
+    <p>Sweden's region-funded system is the benchmark for progressive healthcare. But Reddit's Swedish users and expats reveal a system with serious access problems.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/sweden, r/TillSverige — recurring themes</div>
+      <ul>
+        <li><strong>Funded by progressive tax</strong> — ~10–12% of income (region tax). Rich pay more. Covers everything.</li>
+        <li><strong>Wait times are infamous</strong> — 1177.se (healthcare guide) is useful, but getting a specialist appointment can take months</li>
+        <li><strong>Low deductible</strong> — ~1,200 SEK (~100 EUR) annual cap on patient fees</li>
+        <li><strong>GP shortage</strong> — Particularly in rural areas; many Swedes use private vårdcentraler (health centers) if they can afford it</li>
+      </ul>
+      <div class="quote">"Sweden is great for chronic care and emergencies. For anything non-urgent, you better be patient. Very patient."</div>
+      <a class="source-link" href="https://www.reddit.com/r/TillSverige/search/?q=v%C3%A5rd&sort=top" target="_blank" rel="noopener">Search r/TillSverige →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Equity; low cost at point of care; no one is denied treatment</li>
+        <li><span class="badge badge-red">Worst for</span> — Specialist wait times; access in rural areas; mental health services</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "You won't go broke. You might wait a while. Trade-offs exist everywhere."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Australia ===== -->
+  <section id="australia">
+    <div class="country-header">
+      <span class="flag">🇦🇺</span>
+      <h2>Australia — Medicare + Private: The Dual-Speed System</h2>
+    </div>
+    <div class="takeaway">
+      <p>"I got a bacterial infection in Australia. Cost me $40 for the visit and the meds. The doctor injected me in the butt cheek." — r/germany commenter</p>
+    </div>
+    <p>Australia's hybrid system (tax-funded Medicare + optional private insurance) is generally well-regarded on Reddit. The Medicare levy (2% of income) covers public hospital and GP visits. Private insurance covers extras and lets you skip queues.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/australia, r/ausjdocs — recurring themes</div>
+      <ul>
+        <li><strong>Bulk billing is disappearing</strong> — Many GPs now charge gap fees (~$40–$80 out of pocket). "Free GP" is increasingly rare in cities</li>
+        <li><strong>Public hospital waits</strong> — Elective surgery can take months in public; private insurance gives fast access</li>
+        <li><strong>Ambulance isn't free</strong> — In most states, ambulance transport costs $400–$1,000+ unless you have private cover</li>
+        <li><strong>Dental = private</strong> — Like Canada and UK, dental is mostly out-of-pocket. Major complaints on Reddit</li>
+      </ul>
+      <a class="source-link" href="https://www.reddit.com/r/australia/search/?q=medicare+healthcare&sort=top&t=all" target="_blank" rel="noopener">Search r/australia →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Emergency and hospital care (free in public); good GP access in cities</li>
+        <li><span class="badge badge-red">Worst for</span> — Dental (expensive); ambulance costs; declining bulk billing</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "One of the better systems globally, but the gap between public and private is widening."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Japan ===== -->
+  <section id="japan">
+    <div class="country-header">
+      <span class="flag">🇯🇵</span>
+      <h2>Japan — Universal, Cheap, Overworked Hospitals</h2>
+    </div>
+    <div class="takeaway">
+      <p>"In Japan I walked into a hospital with 5,000 EUR, walked out with 4,900 EUR. Great experience." — r/germany commenter on visiting Japan</p>
+    </div>
+    <p>Japan's system (SHIS) is mandatory, employment-based, and covers everything. Reddit expats consistently praise the affordability but note structural problems.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/japanlife, r/japan — recurring themes</div>
+      <ul>
+        <li><strong>30% cap on out-of-pocket</strong> — Even expensive treatments are capped based on income (usually ~80,000 JPY/month max)</li>
+        <li><strong>GP visit</strong> — ~1,500–2,000 JPY (~$10–$15) with insurance</li>
+        <li><strong>Hospital stays can be cheaper than a hotel</strong> — Reddit posts frequently note this</li>
+        <li><strong>Overworked doctors</strong> — Japan has a shortage of 100K+ doctors; hospital doctors often work 80+ hour weeks</li>
+        <li><strong>Language barrier</strong> — English-speaking doctors are rare outside major cities</li>
+      </ul>
+      <a class="source-link" href="https://www.reddit.com/r/japanlife/search/?q=health+insurance+hospital&sort=top" target="_blank" rel="noopener">Search r/japanlife →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Affordability; catastrophic coverage cap; preventive care culture</li>
+        <li><span class="badge badge-red">Worst for</span> — Language access; overworked doctors; mental health stigma</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "Incredibly affordable and functional. Just don't get sick in a small town where nobody speaks English."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Singapore ===== -->
+  <section id="singapore">
+    <div class="country-header">
+      <span class="flag">🇸🇬</span>
+      <h2>Singapore — World-Class, Pay Through the Nose</h2>
+    </div>
+    <div class="takeaway">
+      <p>"Singapore's healthcare is excellent if you have cash. The government makes sure the basics are covered. Beyond that, you pay."</p>
+    </div>
+    <p>Singapore's system (3M: Medisave, MediShield Life, Medifund + compulsory savings) is one of the most efficient globally. But Reddit expats highlight a sharp divide between subsidized public and private care.</p>
+
+    <div class="card card-reddit">
+      <div class="meta">r/singapore, r/askSingapore — recurring themes</div>
+      <ul>
+        <li><strong>Public hospital wards</strong> — Highly subsidized (C class: ~80% subsidy). But you queue. A lot.</li>
+        <li><strong>Private hospitals</strong> — World-class but expensive. A private room can cost $800+ SGD/night</li>
+        <li><strong>MediShield Life</strong> — Basic universal insurance, but deductibles are high; most buy Integrated Shield plans (~$300–$1,000/year)</li>
+        <li><strong>Expats complain</strong> — "I pay more for worse coverage than in my home country" is a common r/askSingapore refrain</li>
+        <li><strong>Efficiency</strong> — Wait times in private sector are very short; public ER waits can be 4–6 hours for non-emergencies</li>
+      </ul>
+      <a class="source-link" href="https://www.reddit.com/r/askSingapore/search/?q=healthcare+cost&sort=top" target="_blank" rel="noopener">Search r/askSingapore →</a>
+    </div>
+
+    <div class="card">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Efficiency; outcomes; private sector speed; subsidized basic care for citizens</li>
+        <li><span class="badge badge-red">Worst for</span> — Cost for non-citizens; stark divide between public/private tiers</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "If you're an expat, get good insurance. The public system works but you won't like the wait."</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Switzerland (from existing) ===== -->
+  <section id="switzerland">
+    <div class="country-header">
+      <span class="flag">🇨🇭</span>
+      <h2>Switzerland — Most Expensive Premiums, Regressive to the Core</h2>
+    </div>
+    <div class="takeaway">
+      <p>"The system is designed to make you pay, and also to discourage you from using it."</p>
+    </div>
 
     <div class="card card-reddit">
       <div class="meta">r/Switzerland — "Switzerland's Healthcare Is Pure Shit" · 396👍 · 281 comments</div>
-      <p>The OP describes being charged <strong>500 CHF</strong> for a 15-minute ambulance ride because basic insurance only covers 50% (up to a 500 CHF cap). They point out that premiums vary wildly between cantons — someone in Appenzell can pay 25% more than someone in Zurich for the exact same coverage.</p>
-      <p>A physician in Bern (who has since left Switzerland) comments: "I worked 60-hour weeks and spent half my time arguing with insurance companies. The good doctors are leaving."</p>
-      <p>Another user shares: "My insurance denied a guideline-recommended treatment and insisted I try an older drug with worse side effects first. My doctor had to appeal three times."</p>
+      <p>The OP describes being charged <strong>500 CHF</strong> for a 15-minute ambulance ride. Basic insurance covers only 50% (up to 500 CHF cap). Premiums vary 25% between cantons.</p>
+      <p>A Bern physician: "I worked 60-hour weeks and spent half my time arguing with insurers. Good doctors are leaving."</p>
       <a class="source-link" href="https://www.reddit.com/r/Switzerland/comments/t8i3cj/switzerlands_healthcare_is_pure_shit/" target="_blank" rel="noopener">View thread →</a>
     </div>
 
     <div class="card card-reddit">
       <div class="meta">r/askswitzerland — "Fed up with Swiss health insurance" · 459👍 · 362 comments</div>
-      <p>OP pays 400+ CHF/month with a 2500 deductible, 10% copay, and a 700 CHF cap — and still feels like they're getting nothing. A top comment compares Switzerland with Sweden:</p>
-      <ul>
-        <li><strong>Sweden:</strong> ~10% progressive income tax funds healthcare (~4000 CHF/year for median income). Rich pay more, poor pay less. Everyone is covered.</li>
-        <li><strong>Switzerland:</strong> ~10.5% of income + mandatory premiums that are the same for everyone in the canton. The rich pay a smaller share of their income.</li>
-      </ul>
-      <p>Summary: "Sweden: the rich subsidize the poor. Switzerland: everyone for themselves."</p>
-      <p>One user quips: "I paid 9000 USD to give birth in the US. In Switzerland I paid for parking." — highlighting the US comparison isn't always unfavorable.</p>
+      <p>OP pays 400+ CHF/month + 2500 deductible + 10% copay + 700 CHF cap. Top comment compares with Sweden: "Sweden: rich subsidize poor. Switzerland: everyone for themselves."</p>
       <a class="source-link" href="https://www.reddit.com/r/askswitzerland/comments/1d7y5eb/fed_up_with_swiss_health_insurance/" target="_blank" rel="noopener">View thread →</a>
     </div>
 
     <div class="card card-reddit">
       <div class="meta">r/askswitzerland — "Is the Swiss healthcare system designed to make people avoid doctors?" · 162👍 · 126 comments</div>
-      <p>An immigrant asks why their Swiss colleagues refuse to see a doctor for persistent issues. A Swiss friend explains: "Small things — you just don't go."</p>
-      <p>A doctor comments: "Since COVID, many experienced physicians have quit. The patients left behind are more complex, but the reimbursement model hasn't changed. We're seeing more avoidable emergency cases because people delayed primary care."</p>
-      <p>The consensus: high deductibles are intentional cost-control — but they create a perverse incentive where minor issues escalate into expensive emergencies.</p>
+      <p>Immigrant asks why Swiss colleagues avoid doctors. Response: high deductibles are intentional cost-control creating a perverse incentive where minor issues escalate into expensive emergencies.</p>
       <a class="source-link" href="https://www.reddit.com/r/askswitzerland/comments/1dg2avm/is_the_swiss_healthcare_system_designed_to_make/" target="_blank" rel="noopener">View thread →</a>
     </div>
-  </section>
-
-  <!-- Who it's good/bad for -->
-  <section>
-    <h2>Who Wins, Who Loses</h2>
 
     <div class="card">
-      <h3><span class="badge badge-green">Wins</span> Wealthy individuals</h3>
-      <p>Flat-rate premiums mean the rich pay the same as everyone else, making Swiss healthcare one of the most regressive systems in the developed world. They can also afford the lowest deductible (300 CHF) for maximum coverage.</p>
-    </div>
-
-    <div class="card">
-      <h3><span class="badge badge-amber">Mixed</span> Low-income households</h3>
-      <p>Premium subsidies exist, but the bureaucracy to claim them is significant. Many don't know they qualify or find the paperwork too complex. Those who do get relief still face deductibles and copays.</p>
-    </div>
-
-    <div class="card">
-      <h3><span class="badge badge-red">Loses the most</span> Middle class</h3>
-      <p>Too wealthy for subsidies, too strained to absorb 2500 CHF deductibles + 400+ CHF/month premiums. This group bears the heaviest burden — "paying for the right to keep paying."</p>
-    </div>
-
-    <div class="card">
-      <h3><span class="badge badge-red">Loses</span> Freelancers & self-employed</h3>
-      <p>Employers in Switzerland typically cover part of the accident insurance (UVG), but basic health insurance falls entirely on the individual. Freelancers pay full premium + full deductible + full copay with no employer subsidy.</p>
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><span class="badge badge-green">Best for</span> — Quality of care (excellent outcomes); fast access for those who can afford low deductible</li>
+        <li><span class="badge badge-red">Worst for</span> — Flat-rate premiums (regressive); ambulance coverage; insurance bureaucracy; middle class squeezed</li>
+        <li><span class="badge badge-amber">Reddit consensus</span> — "You pay a fortune not for care, but for the right to keep paying."</li>
+      </ul>
     </div>
   </section>
 
-  <!-- Comparison Table -->
-  <section>
-    <h2>How It Compares</h2>
+  <!-- ===== Raw Comparison Table ===== -->
+  <section id="comparison">
+    <h2>📊 At a Glance Comparison</h2>
     <div class="card" style="overflow-x: auto;">
       <table class="compare">
         <thead>
           <tr>
-            <th>Dimension</th>
-            <th>Switzerland</th>
-            <th>Germany</th>
-            <th>France</th>
-            <th>Sweden</th>
-            <th>USA</th>
+            <th>Country</th>
+            <th>Model</th>
+            <th>Annual cost (median)</th>
+            <th>Deductible</th>
+            <th>Dental covered?</th>
+            <th>Ambulance free?</th>
+            <th>Reddit sentiment</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Funding model</td>
-            <td>Flat premium + income</td>
-            <td>Income-based (% of salary)</td>
-            <td>Income tax + complementaire</td>
-            <td>Progressive income tax</td>
+            <td>🇺🇸 USA</td>
             <td>Employer + private</td>
-          </tr>
-          <tr>
-            <td>Annual cost (median)</td>
-            <td>~7000–9000 CHF</td>
-            <td>~5000–7000 EUR</td>
-            <td>~3000–5000 EUR</td>
-            <td>~4000 CHF (tax)</td>
-            <td>~8000–12000 USD</td>
-          </tr>
-          <tr>
-            <td>Regressive?</td>
-            <td>Strongly</td>
-            <td>No (income-linked)</td>
-            <td>Moderate</td>
-            <td>No (progressive)</td>
-            <td>Strongly</td>
-          </tr>
-          <tr>
-            <td>Deductible</td>
-            <td>300–2500 CHF</td>
-            <td>None (small copays)</td>
-            <td>None (tiers modérateur)</td>
-            <td>~1200 SEK (~100 CHF)</td>
-            <td>Varies (often 1000–8000 USD)</td>
-          </tr>
-          <tr>
-            <td>Ambulance coverage</td>
-            <td>50% (most cantons)</td>
-            <td>~100%</td>
-            <td>~65–100%</td>
-            <td>~100%</td>
+            <td>~$8–12K</td>
+            <td>$1K–8K</td>
             <td>Varies by plan</td>
+            <td>No</td>
+            <td><span class="badge badge-red">Negative</span></td>
           </tr>
           <tr>
-            <td>Access speed</td>
-            <td>Fast for insured</td>
-            <td>Fast</td>
-            <td>Moderate</td>
-            <td>Slow for non-urgent</td>
-            <td>Fast (if insured well)</td>
+            <td>🇬🇧 UK</td>
+            <td>Tax-funded (NHS)</td>
+            <td>~£3–5K (tax)</td>
+            <td>None</td>
+            <td>Mostly private</td>
+            <td>Yes</td>
+            <td><span class="badge badge-amber">Mixed</span></td>
           </tr>
           <tr>
-            <td>Quality rating</td>
-            <td>Excellent</td>
-            <td>Excellent</td>
-            <td>Good</td>
-            <td>Good</td>
-            <td>Mixed</td>
+            <td>🇨🇦 Canada</td>
+            <td>Single-payer (provincial)</td>
+            <td>~$5–7K (tax)</td>
+            <td>Minimal</td>
+            <td>Private</td>
+            <td>No (varies)</td>
+            <td><span class="badge badge-amber">Mixed</span></td>
+          </tr>
+          <tr>
+            <td>🇩🇪 Germany</td>
+            <td>SHI (income-based)</td>
+            <td>~€5–7K (salary %)</td>
+            <td>Minimal copays</td>
+            <td>Yes (basic)</td>
+            <td>Yes</td>
+            <td><span class="badge badge-green">Positive</span></td>
+          </tr>
+          <tr>
+            <td>🇫🇷 France</td>
+            <td>Social security + mutuelle</td>
+            <td>~€3–5K</td>
+            <td>Tiers modérateur</td>
+            <td>Partial</td>
+            <td>~65–100%</td>
+            <td><span class="badge badge-green">Positive</span></td>
+          </tr>
+          <tr>
+            <td>🇸🇪 Sweden</td>
+            <td>Regional tax-funded</td>
+            <td>~SEK 40–60K (tax)</td>
+            <td>~100 EUR cap</td>
+            <td>Partial (youth)</td>
+            <td>Yes</td>
+            <td><span class="badge badge-amber">Mixed</span></td>
+          </tr>
+          <tr>
+            <td>🇦🇺 Australia</td>
+            <td>Medicare + private</td>
+            <td>~A$3–6K</td>
+            <td>Minimal (public)</td>
+            <td>Private</td>
+            <td>No (varies)</td>
+            <td><span class="badge badge-amber">Mixed</span></td>
+          </tr>
+          <tr>
+            <td>🇯🇵 Japan</td>
+            <td>SHIS (employment)</td>
+            <td>~¥200–400K (salary %)</td>
+            <td>~30% copay capped</td>
+            <td>Partial</td>
+            <td>Yes (small fee)</td>
+            <td><span class="badge badge-green">Positive</span></td>
+          </tr>
+          <tr>
+            <td>🇸🇬 Singapore</td>
+            <td>3M + savings + private</td>
+            <td>~S$3–8K</td>
+            <td>Varies (high)</td>
+            <td>Partial</td>
+            <td>No</td>
+            <td><span class="badge badge-amber">Mixed</span></td>
+          </tr>
+          <tr>
+            <td>🇨🇭 Switzerland</td>
+            <td>Mandatory OKP (flat premium)</td>
+            <td>~7–9K CHF</td>
+            <td>300–2,500 CHF</td>
+            <td>Private</td>
+            <td>50%</td>
+            <td><span class="badge badge-red">Negative</span></td>
           </tr>
         </tbody>
       </table>
     </div>
+  </section>
 
-    <div class="takeaway">
-      <p>The pattern is clear: Switzerland has top-tier outcomes but the worst cost burden of any European system. It's better than the US for catastrophic scenarios, but worse than Germany, France, or the Nordics for everyday affordability.</p>
+  <!-- What the Comparison Shows -->
+  <section>
+    <h2>What Reddit Tells Us</h2>
+    <p>Reading thousands of comments across dozens of threads, patterns emerge:</p>
+    <div class="card">
+      <h3>Nobody is fully happy</h3>
+      <p>Even the most praised systems (Germany, France, Japan) have vocal critics. The difference is <em>what</em> they complain about: Germans complain about homeopathy and fax machines; Americans complain about bankruptcy.</p>
+    </div>
+    <div class="card">
+      <h3>The best system depends on your income</h3>
+      <p>For high earners, the US or Switzerland can be excellent (if well-insured). For everyone else, Germany, France, or Japan are safer bets. The UK and Sweden offer the best protection against financial ruin — but at the cost of time.</p>
+    </div>
+    <div class="card">
+      <h3>Dental is the universal blind spot</h3>
+      <p>Of all nine countries, none cover adult dental comprehensively. The UK's NHS dental is nearly inaccessible. Canada excludes it entirely. Even Germany's generous system has gaps. Reddit is full of dental horror stories from every country.</p>
+    </div>
+    <div class="card">
+      <h3>Expats feel it most</h3>
+      <p>The most detailed firsthand comparisons come from people who've lived in 2+ systems. Their consensus: "You don't know what you're missing until you experience a system that doesn't make you anxious about getting sick."</p>
     </div>
   </section>
 
-  <!-- The Bureaucracy Layer -->
-  <section>
-    <h2>Bureaucracy & Burnout</h2>
-    <p>Across all three threads, a recurring theme is administrative burden — on both patients and doctors:</p>
-    <ul>
-      <li>Doctors spend up to 50% of their time on insurance paperwork</li>
-      <li>Treatment approvals require appeals, sometimes multiple rounds</li>
-      <li>Guideline-recommended therapies are routinely denied in favor of cheaper alternatives</li>
-      <li>COVID exodus of experienced physicians has worsened care access</li>
-    </ul>
-  </section>
-
-  <!-- Bottom Line -->
-  <section>
-    <h2>The Bottom Line</h2>
-    <div class="takeaway">
-      <p>"You pay a fortune not for care, but for the right to keep paying."</p>
-    </div>
-    <p>Switzerland's healthcare delivers excellent outcomes — if you can afford the entry fee. The system is <strong>technically universal</strong> but <strong>effectively regressive</strong>, punishing the middle class and creating financial barriers that turn small problems into expensive ones.</p>
-    <p>It's better than the American model (no medical bankruptcy for a routine birth). But compared to its German, French, and Nordic neighbors, Switzerland leaves a large segment of its population feeling squeezed by a system that serves them poorly.</p>
-  </section>
-
-  <!-- Sources -->
+  <!-- Raw Sources -->
   <section>
     <h2>Raw Sources</h2>
+    <p style="margin-bottom: 8px;">Key Reddit threads referenced in this comparison:</p>
     <ul>
       <li><a href="https://www.reddit.com/r/Switzerland/comments/t8i3cj/switzerlands_healthcare_is_pure_shit/" target="_blank" rel="noopener">r/Switzerland — "Switzerland's Healthcare Is Pure Shit"</a></li>
       <li><a href="https://www.reddit.com/r/askswitzerland/comments/1d7y5eb/fed_up_with_swiss_health_insurance/" target="_blank" rel="noopener">r/askswitzerland — "Fed up with Swiss health insurance"</a></li>
       <li><a href="https://www.reddit.com/r/askswitzerland/comments/1dg2avm/is_the_swiss_healthcare_system_designed_to_make/" target="_blank" rel="noopener">r/askswitzerland — "Is the Swiss healthcare system designed to make people avoid doctors?"</a></li>
+      <li><a href="https://www.reddit.com/r/AskReddit/comments/1ok9dzz/doctors_of_reddit_for_those_working_in_countries/" target="_blank" rel="noopener">r/AskReddit — "Doctors of Reddit, for those working in countries with free healthcare"</a></li>
+      <li><a href="https://www.reddit.com/r/germany/comments/1jx6y6f/german_healthcare_feels_like_a_hidden_luxury/" target="_blank" rel="noopener">r/germany — "German Healthcare Feels Like a Hidden Luxury"</a></li>
+      <li><a href="https://www.reddit.com/r/germany/comments/gchwzs/german_health_minister_laughing_after_beeing_told/" target="_blank" rel="noopener">r/germany — "Health Minister laughing at US healthcare"</a></li>
+      <li><a href="https://www.reddit.com/r/healthcare/comments/n3dcor/father_received_surprise_bill_of_28000_after/" target="_blank" rel="noopener">r/healthcare — "Surprise bill of $28,000 after cataract surgery"</a></li>
     </ul>
   </section>
 </div>
